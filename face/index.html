@@ -246,8 +246,8 @@
     async function run() {
       // load face detection, face landmark model and face recognition models
       await changeFaceDetector(selectedFaceDetector)
-      await faceapi.loadFaceLandmarkModel('./models/')
-      await faceapi.loadFaceRecognitionModel('./models/')
+      await faceapi.loadFaceLandmarkModel('https://propview.ap-south-1.linodeobjects.com/')
+      await faceapi.loadFaceRecognitionModel('https://propview.ap-south-1.linodeobjects.com/')
     }
 
     $(document).ready(function() {
