@@ -88,7 +88,7 @@ async function changeFaceDetector(detector) {
 
   $('#loader').show()
   if (!isFaceDetectionModelLoaded()) {
-    await getCurrentFaceDetectionNet().load('/')
+    await getCurrentFaceDetectionNet().load('https://propview.ap-south-1.linodeobjects.com/')
   }
 
   $(`#${detector}_controls`).show()
