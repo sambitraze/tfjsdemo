@@ -43,7 +43,7 @@
       <canvas id="queryImgOverlay" class="overlay" />
     </div>
 
-    <p id="message">Hello World!</p>
+    <p id="message">Result</p>
 
 
 </body>
@@ -172,14 +172,15 @@
       ouputScore = detection.score;
       const options = { label }
       const drawBox = new faceapi.draw.DrawBox(detection.box, options)
-      drawBox.draw(canvas)      
+      drawBox.draw(canvas)
       console.log(inputLabel);
       console.log(ouputLabel);
       var length = ouputLabel.length;
       var length2 = inputLabel.length;
-      if(inputLabel.substring(0,length2-3) === ouputLabel.substring(0,length-6)){
-        document.getElementById("message").innerHTML = `Face Recognition succesfull with accuracy: ${(ouputScore * 100).toFixed(2)}%`
-      }else{
+      if (inputLabel.substring(0, length2 - 3) === ouputLabel.substring(0, length - 6)) {
+        document.getElementById("message").innerHTML = `Face Recognition succesfull with accuracy: ${(ouputScore * 100).toFixed(2)}% redirecting now !!!`
+        setTimeout(function () { window.location.replace("/object"); }, 3000);
+      } else {
         document.getElementById("message").innerHTML = `Face Recognition failed`
       }
       console.log(inputScore);
