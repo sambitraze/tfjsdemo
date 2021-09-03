@@ -13,7 +13,6 @@
 </head>
 
 <body>
-  <div id="navbar"></div>
   <div class="center-content page-container">
 
     <p> Reference Image: </p>
@@ -125,16 +124,10 @@
     if (!fullFaceDescriptions.length) {
       return
     }
-
-    // create FaceMatcher with automatically assigned labels
-    // from the detection results for the reference image
     faceMatcher = new faceapi.FaceMatcher(fullFaceDescriptions)
 
     faceapi.matchDimensions(canvas, inputImgEl)
-    // resize detection and landmarks in case displayed image is smaller than
-    // original size
     const resizedResults = faceapi.resizeResults(fullFaceDescriptions, inputImgEl)
-    // draw boxes with the corresponding label as text
     const labels = faceMatcher.labeledDescriptors
       .map(ld => ld.label)
     resizedResults.forEach(({ detection, descriptor }) => {
@@ -161,8 +154,6 @@
       .withFaceDescriptors()
 
     faceapi.matchDimensions(canvas, inputImgEl)
-    // resize detection and landmarks in case displayed image is smaller than
-    // original size
     const resizedResults = faceapi.resizeResults(results, inputImgEl)
 
     resizedResults.forEach(({ detection, descriptor }) => {
