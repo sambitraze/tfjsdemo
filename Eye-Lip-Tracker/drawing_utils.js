@@ -162,7 +162,7 @@
 
             var dist = distHolder[0] - distHolder[1];
             console.log(dist);
-            if(dist > 0.005){
+            if(dist > 0.006){
                 counter++;
             } else {
                 counter = 0;
