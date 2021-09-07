@@ -64,6 +64,12 @@
   <div id="verify">
     <div class="center-content page-container">
       <p> Reference Image: </p>
+      <div class="row">
+        <label>Upload Image:</label>
+        <div>
+          <input id="refImgUploadInput" type="file" class="bold" onchange="uploadRefImage()" accept=".jpg, .jpeg, .png">
+        </div>
+      </div>
       <div class="progress" id="loader">
         <div class="indeterminate"></div>
       </div>
@@ -356,7 +362,7 @@
       await changeFaceDetector(selectedFaceDetector)
       await faceapi.loadFaceLandmarkModel('https://propview.ap-south-1.linodeobjects.com/')
       await faceapi.loadFaceRecognitionModel('https://propview.ap-south-1.linodeobjects.com/')
-      await loadRefImageFromUrl("https://propview.ap-south-1.linodeobjects.com/sambit.jpg")
+      // await loadRefImageFromUrl("https://propview.ap-south-1.linodeobjects.com/sambit.jpg")
       navigator.mediaDevices.getUserMedia({
         video: true,
         audio: false
