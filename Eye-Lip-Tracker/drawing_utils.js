@@ -156,20 +156,22 @@
                     a.moveTo(g.x * e.width, g.y * e.height), 
                     a.lineTo(k.x * e.width, k.y * e.height));
                 ++f;
-
                 a.stroke();
             }
 
             var dist = distHolder[0] - distHolder[1];
-            console.log(dist);
-            if(dist > 0.006){
+            // console.log(dist);
+            if(dist > 0.008){
                 counter++;
             } else {
                 counter = 0;
             }
 
             if(counter > 3) {
-                console.log("Open Mouth")
+                a.strokeStyle = "white";
+                a.fillStyle = "white";
+                a.font = "24pt sans-serif";
+                a.fillText("(Mouth open)",800, 800);
             }
             
             a.restore();
