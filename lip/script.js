@@ -55,6 +55,7 @@ new controls
                 faceMesh.reset();
             },
             onFrame: async (input, size) => {
+                // console.log(input, size);
                 const aspect = size.height / size.width;
                 let width, height;
                 if (window.innerWidth > window.innerHeight) {
@@ -74,27 +75,10 @@ new controls
                 images: [],
             }
         }),
-        // new controls.Slider({
-        //     title: 'Max Number of Faces',
-        //     field: 'maxNumFaces',
-        //     range: [1, 4],
-        //     step: 1
-        // }),
-        // new controls.Slider({
-        //     title: 'Min Detection Confidence',
-        //     field: 'minDetectionConfidence',
-        //     range: [0, 1],
-        //     step: 0.01
-        // }),
-        // new controls.Slider({
-        //     title: 'Min Tracking Confidence',
-        //     field: 'minTrackingConfidence',
-        //     range: [0, 1],
-        //     step: 0.01
-        // }),
     ])
     .on(x => {
         const options = x;
         videoElement.classList.toggle('selfie', options.selfieMode);
+        console.log(options);
         faceMesh.setOptions(options);
     });
