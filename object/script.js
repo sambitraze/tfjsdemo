@@ -15,15 +15,28 @@ function start(e) {
                             canvas.height = video.videoHeight;
                             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                             predictions.forEach(prediction => {
-                                const x = prediction.bbox[0];
-                                const y = prediction.bbox[1];
-                                const width = prediction.bbox[2];
-                                const height = prediction.bbox[3];
-                                ctx.strokeStyle = "red";
-                                ctx.fillStyle = "red";
-                                ctx.font = "20pt sans-serif";
-                                ctx.fillText(prediction.class + " (" + (prediction.score * 100).toFixed(4) + ")", x, y);
-                                ctx.strokeRect(x, y, width, height);
+                                if(prediction.class === "cell phone"){
+                                    const x = prediction.bbox[0];
+                                    const y = prediction.bbox[1];
+                                    const width = prediction.bbox[2];
+                                    const height = prediction.bbox[3];
+                                    ctx.strokeStyle = "red";
+                                    ctx.fillStyle = "red";
+                                    ctx.font = "20pt sans-serif";
+                                    ctx.fillText(prediction.class + " (" + (prediction.score * 100).toFixed(4) + ")", x, y);
+                                    ctx.strokeRect(x, y, width, height);
+                                }
+                                if(prediction.class === "book"){
+                                    const x = prediction.bbox[0];
+                                    const y = prediction.bbox[1];
+                                    const width = prediction.bbox[2];
+                                    const height = prediction.bbox[3];
+                                    ctx.strokeStyle = "red";
+                                    ctx.fillStyle = "red";
+                                    ctx.font = "20pt sans-serif";
+                                    ctx.fillText(prediction.class + " (" + (prediction.score * 100).toFixed(4) + ")", x, y);
+                                    ctx.strokeRect(x, y, width, height);
+                                }
                             });
                         });
                     }, 100);

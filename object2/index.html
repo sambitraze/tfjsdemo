@@ -10,8 +10,23 @@
 </head>
 
 <body>
-    <video id="videoElem" autoplay playsinline></video>
-    
+    <div style="text-align: center;">
+        <header style="background-color: #282c34;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: calc(10px + 2vmin);
+        color: white;">
+            <video id="videoElem" autoplay playsinline
+                style="position: absolute;  margin-left: auto; display: none; margin-right: auto;  left: 0; right: 0;   text-align: center;    z-index: 9;    width: 640;    height: 640;"></video>
+            <canvas id="canvasRef"
+                style="position: absolute;  margin-left: auto;  margin-right: auto;  left: 0; right: 0;   text-align: center;    z-index: 8;    width: 640;    height: 640;"></canvas>
+        </header>
+    </div>
+
+
     <script src="./index.js"></script>
 </body>
 
