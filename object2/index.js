@@ -22,7 +22,8 @@ drawRect = (boxes, classes, scores, threshold, imgWidth, imgHeight, ctx) => {
 
             // DRAW!!
             ctx.beginPath()
-            ctx.fillText(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100, x * imgWidth, y * imgHeight - 10)
+            
+            ctx.fillText(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100, x, y);
             ctx.rect(x * imgWidth, y * imgHeight, width * imgWidth / 2, height * imgHeight / 2);
             ctx.stroke()
         }
@@ -35,10 +36,11 @@ window.onload = async function () {
     }).then(async (stream) => {
         videoElem.srcObject = stream;
         const MODEL_URL = './model/model.json';
-        const model = await tf.loadGraphModel(MODEL_URL);
+        let model;
+        model = await tf.loadGraphModel(MODEL_URL);
         detection = setInterval(async () => {
             await detect(model);
-        }, 1000);
+        }, 500);
 
     }).catch((err) => {
         alert(err);
@@ -50,49 +52,39 @@ const detect = async (net) => {
     const videoHeight = videoElem.videoHeight;
     canvasRef.width = videoElem.videoWidth;
     canvasRef.height = videoElem.videoHeight;
-
     // 4. TODO - Make Detections
-    
-    const exp = tf.tidy(() => {
-        const img = tf.browser.fromPixels(videoElem);
-        const resized = tf.image.resizeBilinear(img, [640, 640]);
-        const casted = resized.cast("int32");
-        const expanded = casted.expandDims(0);
-        return expanded;
-    });
 
-    const obj = await net.executeAsync(exp);
-    const boxes = await obj[2].array(); //
-    const classes = await obj[4].array(); //Classes  
-    const scores = await obj[7].array();
+    const img = tf.browser.fromPixels(videoElem);
+    const resized = tf.image.resizeBilinear(img, [640, 640]);
+    const casted = resized.cast("int32");
+    const expanded = casted.expandDims(0);
+    const obj = await net.executeAsync(expanded);
+
+    const boxes = await obj[0].array(); //
+    const classes = await obj[2].array(); //Classes  
+    const scores = await obj[3].array();
+    // console.log(await obj[0].array());
     // Draw mesh
     const ctx = canvasRef.getContext("2d");
+    
+//   ctx.drawImage(videoElem, 0, 0, canvasRef.width, canvasRef.height);
 
-    // 5. TODO - Update drawing utility
-    // drawSomething(obj, ctx)
-    // requestAnimationFrame(() => {
-    // drawRect(
-    //     boxes[0],
-    //     classes[0],
-    //     scores[0],
-    //     0.8,
-    //     videoWidth,
-    //     videoHeight,
-    //     ctx
-    // );
-    // });
-
-    for (let i = 0; i <= boxes[0].length; i++) {
-        if (boxes[0][i] && classes[0][i] && scores[0][i] > 0.4) {
-            const text = classes[0][i]
-            console.log(labelMap[text]['name'] + ' - ' + Math.round(scores[0][i] * 100) / 100,);
-        }
-    }
+        drawRect(
+            boxes[0],
+            classes[0],
+            scores[0],
+            0.65,
+            videoWidth,
+            videoHeight,
+            ctx
+        );
 
 
-    // tf.dispose(img);
-    // tf.dispose(resized);
-    // tf.dispose(casted);
-    // tf.dispose(expanded);
+
+    tf.dispose(img);
+    tf.dispose(resized);
+    tf.dispose(casted);
+    tf.dispose(expanded);
     tf.dispose(obj);
+
 };
