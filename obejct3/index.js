@@ -7,25 +7,46 @@ const labelMap = {
     2: { name: 'Phone', color: 'yellow' },
 }
 
+//book 0.8 phone 0.6
 // Define a drawing function
 drawRect = (boxes, classes, scores, threshold, imgWidth, imgHeight, ctx) => {
     for (let i = 0; i <= boxes.length; i++) {
-        if (boxes[i] && classes[i] && scores[i] > threshold) {
-            const [y, x, height, width] = boxes[i]
-            const text = classes[i]
-            console.log(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100,);
-            // Set styling
-            ctx.strokeStyle = labelMap[text]['color']
-            ctx.lineWidth = 2
-            ctx.fillStyle = 'white'
-            ctx.font = '30px Arial'
+        if (classes[i] === 1) {
+            if (boxes[i] && scores[i] > 0.8) {
+                const [y, x, height, width] = boxes[i]
+                const text = classes[i]
+                console.log(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100,);
+                // Set styling
+                ctx.strokeStyle = labelMap[text]['color']
+                ctx.lineWidth = 2
+                ctx.fillStyle = 'white'
+                ctx.font = '30px Arial'
 
-            // DRAW!!
-            ctx.beginPath()            
-            ctx.fillText(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100, x, y);
-            ctx.rect(x * imgWidth, y * imgHeight, width * imgWidth / 2, height * imgHeight / 2);
-            ctx.stroke()
+                // DRAW!!
+                ctx.beginPath()
+                ctx.fillText(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100, x, y);
+                ctx.rect(x * imgWidth, y * imgHeight, width * imgWidth / 2, height * imgHeight / 2);
+                ctx.stroke()
+            }
+        } else if (classes[i] === 2) {
+            if (boxes[i] && scores[i] > 0.9) {
+                const [y, x, height, width] = boxes[i]
+                const text = classes[i]
+                console.log("Phone" + ' - ' + Math.round(scores[i] * 100) / 100,);
+                // Set styling
+                ctx.strokeStyle = labelMap[text]['color']
+                ctx.lineWidth = 2
+                ctx.fillStyle = 'white'
+                ctx.font = '30px Arial'
+
+                // DRAW!!
+                ctx.beginPath()
+                ctx.fillText(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100, x, y);
+                ctx.rect(x * imgWidth, y * imgHeight, width * imgWidth / 2, height * imgHeight / 2);
+                ctx.stroke()
+            }
         }
+
     }
 }
 
@@ -71,18 +92,18 @@ const detect = async (net) => {
     // console.log(await obj[6].array());
     // Draw mesh
     const ctx = canvasRef.getContext("2d");
-    
-//   ctx.drawImage(videoElem, 0, 0, canvasRef.width, canvasRef.height);
 
-        drawRect(
-            boxes[0],
-            classes[0],
-            scores[0],
-            0.65,
-            videoWidth,
-            videoHeight,
-            ctx
-        );
+    //   ctx.drawImage(videoElem, 0, 0, canvasRef.width, canvasRef.height);
+
+    drawRect(
+        boxes[0],
+        classes[0],
+        scores[0],
+        0.6,
+        videoWidth,
+        videoHeight,
+        ctx
+    );
 
 
 
