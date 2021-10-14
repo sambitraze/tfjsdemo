@@ -21,8 +21,7 @@ drawRect = (boxes, classes, scores, threshold, imgWidth, imgHeight, ctx) => {
             ctx.font = '30px Arial'
 
             // DRAW!!
-            ctx.beginPath()
-            
+            ctx.beginPath()            
             ctx.fillText(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100, x, y);
             ctx.rect(x * imgWidth, y * imgHeight, width * imgWidth / 2, height * imgHeight / 2);
             ctx.stroke()
@@ -60,10 +59,16 @@ const detect = async (net) => {
     const expanded = casted.expandDims(0);
     const obj = await net.executeAsync(expanded);
 
+    //final1
     const boxes = await obj[0].array(); //
     const classes = await obj[2].array(); //Classes  
     const scores = await obj[3].array();
-    // console.log(await obj[0].array());
+
+    //final3
+    // const boxes = await obj[6].array(); //
+    // const classes = await obj[2].array(); //Classes  
+    // const scores = await obj[3].array();
+    // console.log(await obj[6].array());
     // Draw mesh
     const ctx = canvasRef.getContext("2d");
     
