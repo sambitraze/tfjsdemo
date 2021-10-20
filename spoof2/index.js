@@ -15,7 +15,6 @@ window.onload = async function () {
                 .toFloat()
                 .expandDims();
             const prediction = await model.predict(tfImg);
-            console.log(prediction);
             const values = prediction.dataSync();
             const arr = Array.from(values);
             console.log(arr);
