@@ -1,4 +1,5 @@
 const videoElem = document.getElementById("videoElem");
+const messageElem = document.getElementById("message");
 var script = document.createElement('script');
 script.src = 'https://rawgit.com/paulirish/memory-stats.js/master/bookmarklet.js';
 document.head.appendChild(script);
@@ -17,7 +18,7 @@ window.onload = async function () {
             const prediction = await model.predict(tfImg);
             const values = prediction.dataSync();
             const arr = Array.from(values);
-            console.log(arr);
+            messageElem.innerText = "Real: " + arr[0].toFixed(2) * 100 + "% -- " +"Spoof: " + arr[1].toFixed(2) * 100 + "%"
         }, 3000);
 
     }).catch((err) => {
