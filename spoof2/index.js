@@ -19,7 +19,7 @@ window.onload = async function () {
             const values = prediction.dataSync();
             const arr = Array.from(values);
             messageElem.innerText = "Real: " + arr[0].toFixed(2) * 100 + "% -- " +"Spoof: " + arr[1].toFixed(2) * 100 + "%"
-        }, 3000);
+        }, 1000);
 
     }).catch((err) => {
         alert(err);
