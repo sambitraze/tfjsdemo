@@ -36,7 +36,7 @@ drawRect = (boxes, classes, scores, imgWidth, imgHeight, ctx) => {
         } else if (classes[i] === 2 && boxes[i] && scores[i] > phoneStr) {
             const [y, x, height, width] = boxes[i]
             const text = classes[i]
-            console.log("Phone" + ' - ' + Math.round(scores[i] * 100) / 100,);
+            console.log(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100,);
             // Set styling
             ctx.strokeStyle = labelMap[text]['color']
             ctx.lineWidth = 2
@@ -71,11 +71,11 @@ window.onload = async function () {
     });
 
     bookslider.oninput = function (event) {
-        bookStr = event.target.value / 10;
+        bookStr = event.target.value;
         bookStrVal.innerText = bookStr;
     }
     phoneslider.oninput = function (event) {
-        phoneStr = event.target.value / 10;
+        phoneStr = event.target.value;
         phoneStrVal.innerText = phoneStr;
     }
 }
