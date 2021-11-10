@@ -7,15 +7,15 @@ const canvasRef = document.getElementById("canvasRef");
 const im = document.getElementById("im");
 
 const labelMap = {
-    1: { name: 'Collector', color: 'red', str: 0.4 },
+    1: { name: 'Connector', color: 'red', },
 }
-
+str= 0.4
 
 //book 0.8 phone 0.6
 // Define a drawing function
 drawRect = (boxes, classes, scores, imgWidth, imgHeight, ctx) => {
     for (let i = 0; i <= boxes.length; i++) {
-        if (classes[i] === 1 && boxes[i] && scores[i] > labelMap[text]['str']) {
+        if (classes[i] === 1 && boxes[i] && scores[i] > 0.4) {
             const [y, x, height, width] = boxes[i]
             const text = classes[i]
             console.log(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100,);
