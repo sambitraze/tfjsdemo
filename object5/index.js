@@ -7,18 +7,15 @@ const canvasRef = document.getElementById("canvasRef");
 const im = document.getElementById("im");
 
 const labelMap = {
-    1: { name: 'Book', color: 'red' },
-    2: { name: 'Phone', color: 'yellow' },
+    1: { name: 'Collector', color: 'red', str: 0.4 },
 }
 
-var phoneStr = 0.4;
-var bookStr = 0.4;
 
 //book 0.8 phone 0.6
 // Define a drawing function
 drawRect = (boxes, classes, scores, imgWidth, imgHeight, ctx) => {
     for (let i = 0; i <= boxes.length; i++) {
-        if (classes[i] === 1 && boxes[i] && scores[i] > bookStr) {
+        if (classes[i] === 1 && boxes[i] && scores[i] > labelMap[text]['str']) {
             const [y, x, height, width] = boxes[i]
             const text = classes[i]
             console.log(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100,);
@@ -31,21 +28,6 @@ drawRect = (boxes, classes, scores, imgWidth, imgHeight, ctx) => {
             // DRAW!!
             ctx.beginPath()
             ctx.fillText(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100, x * imgWidth, y * imgHeight,);
-            ctx.rect(x * imgWidth, y * imgHeight, width * imgWidth / 2, height * imgHeight / 2);
-            ctx.stroke()
-        } else if (classes[i] === 2 && boxes[i] && scores[i] > phoneStr) {
-            const [y, x, height, width] = boxes[i]
-            const text = classes[i]
-            console.log(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100,);
-            // Set styling
-            ctx.strokeStyle = labelMap[text]['color']
-            ctx.lineWidth = 2
-            ctx.fillStyle = labelMap[text]['color']
-            ctx.font = '30px Arial'
-
-            // DRAW!!
-            ctx.beginPath()
-            ctx.fillText(labelMap[text]['name'] + ' - ' + Math.round(scores[i] * 100) / 100,x * imgWidth, y * imgHeight,);
             ctx.rect(x * imgWidth, y * imgHeight, width * imgWidth / 2, height * imgHeight / 2);
             ctx.stroke()
         }
